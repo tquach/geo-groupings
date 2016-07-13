@@ -1,0 +1,62 @@
+[
+  {
+    "lat": 40.756050,
+    "lon": -73.998318,
+    "id": "c24e8984-abd3-4e2a-ac5e-0dead05725f8",
+    "name": "Hell's Kitchen, New York"
+  },
+  {
+    "lat": 40.729579,
+    "lon": -74.000042,
+    "id": "5403d956-b94b-4e9a-ad19-01b7f1eb9e56",
+    "name": "Greenwich Village, New York"
+  },
+  {
+    "lat": 40.777336,
+    "lon": -73.976675,
+    "id": "ff5b8203-7da1-438e-b816-7182f01b56e6",
+    "name": "Central Park"
+  },
+  {
+    "lat": 40.640108,
+    "lon": -73.929702,
+    "id": "3a9ad804-ba22-472a-852b-bc07e9bd3c35",
+    "name": "East New York"
+  },
+  {
+    "lat": 39.940846,
+    "lon": -75.158555,
+    "id": "d3e67e3d-e255-47c7-b03f-a09fb3512e78",
+    "name": "Philadelphia"
+  },
+  {
+    "lat": 43.648586,
+    "lon": -79.385430,
+    "id": "89d3202a-0041-4dfe-9a8f-c99f1c390767",
+    "name": "Toronto"
+  },
+  {
+    "lat": 40.851536,
+    "lon": -73.876971,
+    "id": "d5205c0b-cada-4bc3-b8d5-8bf38f1c8617",
+    "name": "Bronx Zoo, New York"
+  },
+  {
+    "lat": 40.898668,
+    "lon": -73.787868,
+    "id": "dd702c5c-75ab-47b4-a957-d850fe16ba1b",
+    "name": "Bronx, New York"
+  },
+  {
+    "lat": 40.900861,
+    "lon": -73.798152,
+    "id": "dae392d3-1002-4324-c257-9873ca133a1b",
+    "name": "Pelham, New York"
+  },
+  {
+    "lat": 40.861465,
+    "lon": -73.890487,
+    "id": "dae392d3-1002-4324-c257-9873ca133a1b",
+    "name": "E Fordham Road, Bronx, New York"
+  }
+]

@@ -1,6 +1,6 @@
-from math import radians, cos, sin, asin, sqrt
+from math import radians, cos, sin, asin, sqrt, pi
 
-# Radius of earth in kilometers.
+# Radius of earth in km.
 EARTH_RADIUS = 6371
 
 
@@ -10,7 +10,7 @@ def circle_distance(p1, p2):
     between two points on the earth as decimal degrees.
     """
     # longitude is x coord, latitude is y coord
-    lon1, lat1, lon2, lat2 = map(radians, [p1.x, p1.y, p2.x, p2.y])
+    lon1, lat1, lon2, lat2 = map(radians, [p1.lon, p1.lat, p2.lon, p2.lat])
 
     # use haversine formula
     delta_lon = lon2 - lon1
@@ -20,7 +20,6 @@ def circle_distance(p1, p2):
     return c * EARTH_RADIUS
 
 
-def partition(arr, n):
-    """ Partitions an array in n-sized groups.
-    """
-    return [arr[i::n] for i in xrange(n)]
+def euclidean_distance(p1, p2):
+    lon1, lat1, lon2, lat2 = map(radians, [p1.lon, p1.lat, p2.lon, p2.lat])
+    return sqrt((lon1 - lon2) ** 2 + (lat1 - lat2) ** 2)
