@@ -1,5 +1,5 @@
 # Application level settings
-DEBUG = True
+DEBUG = False
 
 # Logging format for messages
 LOG_FORMAT = '%(asctime)s - %(levelname)s - %(message)s'

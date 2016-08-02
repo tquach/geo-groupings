@@ -8,4 +8,9 @@ This implementation generates a series of groupings for a given set of geodata l
 
 # Running
 
-	python app.py 5 path/to/json_data_file
+	python app.py <num_partitions> <path/to/json_data_file>
+
+# Background
+
+This implementation uses a k-means partitioning approach from the sklearn library. There is an alternate approach
+which uses DBSCAN which is similar to the k-means approach, but

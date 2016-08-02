@@ -1,8 +1,11 @@
 import json
-import random
 
-from geogroups import logger, utils
-from geogroups.model import Point, Group
+import numpy
+from scipy.spatial import distance
+from sklearn.cluster.k_means_ import KMeans
+
+from geogroups import logger
+from geogroups.model import Point
 
 
 def from_file(filename):
@@ -10,40 +13,39 @@ def from_file(filename):
     with open(filename, 'rb') as f:
         contents = json.load(f)
 
-    geopoints = [Point(node['name'], node['lat'], node['lon']) for node in contents]
+    geopoints = [Point(node['id'], float(node['lat']), float(node['lon'])) for node in contents]
     return geopoints
 
 
-def group_by(points, size, resolution=1.5):
-    seeds = random.sample(points, size)
-    buckets = [Group([p]) for p in seeds]
+class Grouping(object):
+    def __init__(self, points):
+        self.points = points
 
-    cnt = 0
-    while True:
-        groups = [[] for b in buckets]
-        bucket_size = len(buckets)
-        cnt += 1
+    def group_by_proximity(self, k=10):
+        if len(self.points) == 0:
+            return {}
 
-        for p in points:
-            min_distance = utils.euclidean_distance(p, buckets[0].centroid)
-            min_idx = 0
+        X = numpy.array([[p.lat, p.lon] for p in self.points])
 
-            for i in range(bucket_size - 1):
-                distance = utils.euclidean_distance(p, buckets[i + 1].centroid)
-                if distance < min_distance:
-                    min_distance = distance
-                    min_idx += 1
+        distance_matrix = distance.squareform(distance.pdist(X))
+        db = KMeans(n_clusters=k).fit(distance_matrix)
 
-            groups[min_idx].append(p)
+        # re-attach ids
+        grouped_points = {}
+        for i, k in enumerate(db.labels_):
+            logger.debug('idx, label [%s, %s]', i, k)
+            if k not in grouped_points:
+                grouped_points[k] = []
+            point = self.points[i]
+            grouped_points[k].append({'id': point.uid, 'lat': point.lat, 'lon': point.lon})
 
-        dmax = 0.0
-        for i in range(bucket_size):
-            if len(groups[i]) == 0:
-                continue
-            ddist = buckets[i].update(groups[i])
-            dmax = max(dmax, ddist)
+        logger.info('Finished grouping into %d groups.', len(grouped_points))
+        return grouped_points
 
-        if dmax < resolution:
-            logger.debug('all done')
-            break
-    return buckets
+    def _group_by_dbscan(self, eps=1.5):
+        # use haversine function for distance calculation
+        # eps /= EARTH_RADIUS
+        # df = pd.read_json('./test/_data/airports.small.json')
+        # coords = df.as_matrix(columns=['lat', 'lon'])
+        # db = DBSCAN(eps=eps, min_samples=1, algorithm='ball_tree', metric='haversine').fit(numpy.radians(coords))
+        raise NotImplementedError("Unimplemented.")
