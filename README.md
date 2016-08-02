@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tquach/geo-groupings.svg?branch=master)](https://travis-ci.org/tquach/geo-groupings)
+
 # Geo Point Groupings
 
 This implementation generates a series of groupings for a given set of geodata locations based on proximity.
